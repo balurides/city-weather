@@ -10,10 +10,10 @@ export const fecthUsers = () => async dispatch => {
 };
     
 export const fetchAlbums = userId => async dispatch => {
-    const response1 = await jsonPlaceholder.get(`/albums/userId=${userId}`);
+    const response = await jsonPlaceholder.get(`/albums?userId=${userId}`);
     dispatch({
         type:'FETCH_ALBUMS',
-        payload:response1.data
+        payload:response.data
     });
 };
     
