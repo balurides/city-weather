@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-
-import DisplayUsers from './DisplayUser';
-import DisplayAlbums  from './DisplayAlbums';
+import WeatherSearch  from "./Weather";
 
 export default class App extends Component {
   
   render() {
     return (
       <div className="App">
-        React Starter
-        <DisplayUsers />
-        ********************
-        <DisplayAlbums />
+        weather app
+        <WeatherSearch />
       </div>
     );
   }
