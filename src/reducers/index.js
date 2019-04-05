@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux';
-// import userReducer from './userReducer';
+import updateCity from './updateCity';
 // import albumReducer from './albumReducer';
 
 export default combineReducers({
-    
-
+    city:updateCity
 });

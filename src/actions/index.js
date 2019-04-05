@@ -1,4 +1,5 @@
-import _ from 'lodash';
+// import _ from 'lodash';
+/*
 import fetchWeather from '../apis/fetchweather';
 import {API_KEY} from '../constants/keys';
 
@@ -11,4 +12,14 @@ export const fecthWeatherWithCity = (city) => async dispatch => {
         payload:response.data
     });
 };
+ */
+export const updateCity = city => async dispatch => {
+    console.log('state' + city);
+    dispatch({
+        type:'UPDATE_CITY',
+        payload:city
+    });
+};
+    
+    
     

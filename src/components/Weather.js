@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fecthWeatherWithCity } from '../actions';
+import  updateCity from '../actions';
 
 class WeatherSearch extends Component{
     state = {
-        city:'chicago',
+        city:'',
         country:'USA'
     };
-    componentDidMount() {
-        this.props.fecthWeatherWithCity(this.state.city);
-    }
+    
     cityChange = event => {
         this.setState({city:event.target.value});
+        updateCity(city);
     }
     weatherSubmit = event => {
         event.preventDefault();
@@ -31,7 +30,7 @@ class WeatherSearch extends Component{
                     <input
                         type="textarea" 
                         placeholder="Enter city" 
-                        value={this.state.city}
+                        value={this.cityChange}
                         onChange={this.cityChange}
                     />
                     and
@@ -48,9 +47,9 @@ class WeatherSearch extends Component{
 
 const mapStateToProps = state => {
     return{
-
-    };
+        city:state.city
+    };  
 }
 
-export default connect(mapStateToProps,{fecthWeatherWithCity})
+export default connect(mapStateToProps,{updateCity})
     (WeatherSearch);
