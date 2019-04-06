@@ -14,7 +14,6 @@ export const fecthWeatherWithCity = (city) => async dispatch => {
 };
  */
 export const updateCity = city => async dispatch => {
-    console.log('state' + city);
     dispatch({
         type:'UPDATE_CITY',
         payload:city

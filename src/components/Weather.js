@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import  updateCity from '../actions';
+import _ from 'lodash';
+
+import { updateCity } from '../actions';
 
 class WeatherSearch extends Component{
-    state = {
-        city:'',
-        country:'USA'
-    };
+    constructor(props){
+        super(props);
+        this.state = {
+            city:'',
+            country:'USA'
+        };
+        this.cityChange = _.debounce(this.cityChange.bind(this),1000);
+    }
     
     cityChange = event => {
         this.setState({city:event.target.value});
-        updateCity(city);
+        this.props.updateCity(this.state.city);
     }
+
     weatherSubmit = event => {
         event.preventDefault();
-        console.log('city' + this.state.city);
-
     }
 
     render(){
@@ -30,7 +35,7 @@ class WeatherSearch extends Component{
                     <input
                         type="textarea" 
                         placeholder="Enter city" 
-                        value={this.cityChange}
+                        value={this.state.city}
                         onChange={this.cityChange}
                     />
                     and
@@ -51,5 +56,4 @@ const mapStateToProps = state => {
     };  
 }
 
-export default connect(mapStateToProps,{updateCity})
-    (WeatherSearch);
+export default connect(mapStateToProps, {updateCity})(WeatherSearch);
