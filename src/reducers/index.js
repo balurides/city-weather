@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import updateCity from './updateCity';
-// import albumReducer from './albumReducer';
+import fetchWeather from './fetchWeather';
 
 export default combineReducers({
-    city:updateCity
+    city:updateCity,
+    fetchWeather:fetchWeather
 });
