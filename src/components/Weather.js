@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updateCity,fecthWeatherWithCity } from '../actions';
+import WeatherData from './weatherData';
 
 class WeatherSearch extends Component{
         state = {
-            city:'chicago',
+            city:'',
             fetchWeather:[],
             country:'USA'
         };
-    componentDidMount() {
-        console.log(this.state.city);
-        this.props.fecthWeatherWithCity(this.state.city);
-    }
-    
-  
+    componentWillMount() {
+            console.log('test componentDidmonnt' + this.state.city);
+            this.props.fecthWeatherWithCity("chicago");
+        }
     cityChange = event => {
             this.setState({city:event.target.value});
-            this.props.updateCity(this.state.city);   
+            this.props.updateCity(this.state.city); 
+            this.props.fecthWeatherWithCity(this.state.city);
     }
 
     weatherSubmit = event => {
@@ -25,6 +25,8 @@ class WeatherSearch extends Component{
     }
 
     render(){
+        // this.props.fecthWeatherWithCity(this.state.city);
+
         return(
             <div>
                 <form onSubmit={this.weatherSubmit}>
@@ -42,6 +44,7 @@ class WeatherSearch extends Component{
                         <input placeholder="enter country" />
                     </label>
                 </div>
+                <WeatherData cityName = {this.state.city} />
                 </form>
             </div>
         );
@@ -51,7 +54,7 @@ class WeatherSearch extends Component{
 const mapStateToProps = state => {
     return{
         city:state.city,
-        fetchWeather:state.fetchWeather
+        fetchWeather: state.fetchWeather
     };  
 }
 
