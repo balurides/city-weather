@@ -2,24 +2,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { fecthWeatherWithCity } from '../actions';
+import TempConversion from './tempConversion';
 
 class WeatherData extends React.Component{
-    renderWeather(weatherData) {
+
+    RenderWeather= ({weatherData}) => {
         return(
             weatherData.map((weather) => {
                 return(
-                    console.log(weather.main.temp)
-                );
-            })
+                    <div key={weather.id}>
+                        <span> Today temparature at {this.props.cityName} 
+                        {isNaN(weather.main.temp) ? TempConversion(weather.main.temp) :null }
+                        </span>
+                    </div>
+            )
+        })
         );
     }
+
     render() {
-        var weatherData = this.props.fetchWeather;
-        this.renderWeather(weatherData);
         return(
             <div>
-                Weather data
-                {/* <this.renderWeather weatherData = {this.props.fetchWeather}/> */}
+                Weather data at {this.props.cityName}
+                <this.RenderWeather weatherData = {this.props.fetchWeather} />
             </div>
         );
     }

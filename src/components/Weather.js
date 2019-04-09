@@ -11,7 +11,6 @@ class WeatherSearch extends Component{
             country:'USA'
         };
     componentWillMount() {
-            console.log('test componentDidmonnt' + this.state.city);
             this.props.fecthWeatherWithCity("chicago");
         }
     cityChange = event => {
