@@ -5,15 +5,13 @@ import { fecthWeatherWithCity } from '../actions';
 import TempConversion from './tempConversion';
 
 class WeatherData extends React.Component{
-
+    
     RenderWeather= ({weatherData}) => {
         return(
             weatherData.map((weather) => {
                 return(
                     <div key={weather.id}>
-                        <span> Today temparature at {this.props.cityName} 
-                        {isNaN(weather.main.temp) ? TempConversion(weather.main.temp) :null }
-                        </span>
+                        <TempConversion weather={weather.main}/>
                     </div>
             )
         })

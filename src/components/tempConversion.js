@@ -1,13 +1,14 @@
 
-const TempConversion = (kevinTemp,tempTo) => {
-    switch (tempTo) {
-        case 'celsius':
-            return kevinTemp - 273.15;
-        case 'Fahrenheit':
-            return ((300*kevinTemp)-273.15)*9/5 + 32;
-        default:
-            return kevinTemp;
-    }
-}
+import React from 'react';
 
-export default TempConversion();
+export default function TempConversion ({weather}) {
+    let temp = weather.temp;
+    let celsiusTemp = Math.round(temp-273.15);
+    return(
+        <div>
+            <span>
+                Temp {celsiusTemp} c
+            </span>
+        </div>
+    )
+}
