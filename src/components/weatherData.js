@@ -19,12 +19,13 @@ class WeatherData extends React.Component{
     }
 
     render() {
+
         return(
             <div>
                 Weather data at {this.props.cityName}
                 <this.RenderWeather weatherData = {this.props.fetchWeather} />
             </div>
-        );
+        )
     }
 }
 

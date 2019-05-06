@@ -1,4 +1,4 @@
-export default(state =[], action) => {
+export default(state='', action) => {
     switch (action.type) {
         case 'UPDATE_CITY':
             return [...state, action.payload];
