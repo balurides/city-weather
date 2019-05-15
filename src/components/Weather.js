@@ -5,50 +5,69 @@ import { updateCity,fecthWeatherWithCity,updateCountry } from '../actions';
 import WeatherData from './weatherData';
 
 class WeatherSearch extends Component{
-        state = {
-            city:'',
+    constructor(props){
+        super(props);
+        this.state ={
+            city:``,
             fetchWeather:[],
             country:'USA',
             unit:''
-        };
-    // componentWillMount() {
-    //         this.props.fecthWeatherWithCity("chicago");
-    //     }
-    cityChange = event => {
-            this.setState({city:event.target.value});
-            this.props.updateCity(this.state.city); 
+        }
+    }
+ /*    componentWillMount() {
+            this.props.fecthWeatherWithCity("chicago");
+        } */
+        // componentDidMount(){
+        //     this.props.fecthWeatherWithCity(this.state.city);
+        // }
+        
+    cityChange = city => {
+        if(city.length >0) {
+            this.setState({city})
+        }
+        this.props.updateCity(city); 
     }
     unitChange = event => {
         this.setState({unit:event.target.value});
     }
 
-    countryChange = e => {
-        setTimeout(this.setState({country:e.target.value}),2000);
+    countryChange = country => {
+        if(country.length>0) {
+            this.setState({country});
+        } 
         this.props.updateCountry(this.state.country);
     }
     weatherSubmit = event => {
         event.preventDefault();
+        console.log("city state is changed to " + this.state.city);     // this.props.fecthWeatherWithCity(this.state.city);
+        this.props.fecthWeatherWithCity(this.state.city);
+        // { <WeatherData />};
+
+        // this.setState({city:""});
     }
 
     render(){
         // this.props.fecthWeatherWithCity(this.state.city);
         return(
-            <div>
+                <div>
                 <form onSubmit={this.weatherSubmit}>
                     <div>
                     <label> City : </label>
                     <input
-                        type="textarea" 
+                        type="text" 
                         placeholder="Enter city" 
-                        value={this.state.city}
-                        onChange={this.cityChange}
+                        onChange={event =>{
+                            this.cityChange(event.target.value)}
+                        }
                     />
                     and
                     <label>
                         Country :
                         <input placeholder="enter country"
                             value={this.state.country}
-                            onChange={this.countryChange}
+                            onChange={event => {
+                                this.countryChange(event.target.value)}
+                            }
                          />
                     </label>
                     <label>
@@ -59,11 +78,11 @@ class WeatherSearch extends Component{
                         </select>
 
                     </label>
+                    <button type="submit">Submit</button>
                 </div>
-
-                <WeatherData cityName = {this.state.city} />
                 </form>
-            </div>
+                <WeatherData />
+                </div>
         );
     }
 }

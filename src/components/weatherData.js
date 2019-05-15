@@ -11,7 +11,8 @@ class WeatherData extends React.Component{
             weatherData.map((weather) => {
                 return(
                     <div key={weather.id}>
-                        <TempConversion weather={weather.main}/>
+                        <TempConversion 
+                        weather={weather.main}/>
                     </div>
             )
         })
@@ -19,7 +20,7 @@ class WeatherData extends React.Component{
     }
 
     render() {
-
+        console.log("cityname weather data " + this.props.city);
         return(
             <div>
                 Weather data at {this.props.cityName}
@@ -31,7 +32,8 @@ class WeatherData extends React.Component{
 
 const mapStateToProps = state => {
     return{
-        fetchWeather: state.fetchWeather
+        fetchWeather: state.fetchWeather,
+        city:state.city
     }
 }
 export default connect(mapStateToProps ,{fecthWeatherWithCity})(WeatherData);

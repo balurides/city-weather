@@ -24,6 +24,7 @@ export const updateCountry = country => dispatch =>{
         type:'UPDATE_COUNTRY',
         payload:country
     })
+    console.log(country);
 }
     
     
