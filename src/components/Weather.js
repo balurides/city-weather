@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import propTypes from 'prop-types';
 
 import { updateCity,fecthWeatherWithCity,updateCountry } from '../actions';
 import WeatherData from './weatherData';
 
-class WeatherSearch extends Component{
+ class WeatherSearch extends Component{
     constructor(props){
         super(props);
         this.state ={
@@ -41,9 +42,6 @@ class WeatherSearch extends Component{
         event.preventDefault();
         console.log("city state is changed to " + this.state.city);     // this.props.fecthWeatherWithCity(this.state.city);
         this.props.fecthWeatherWithCity(this.state.city);
-        // { <WeatherData />};
-
-        // this.setState({city:""});
     }
 
     render(){
@@ -81,10 +79,11 @@ class WeatherSearch extends Component{
                     <button type="submit">Submit</button>
                 </div>
                 </form>
-                <WeatherData />
+                <WeatherData city={this.state.city}/>
                 </div>
         );
     }
+
 }
 
 const mapStateToProps = state => {
@@ -96,3 +95,7 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {updateCity,fecthWeatherWithCity,updateCountry})(WeatherSearch);
+
+WeatherSearch.propTypes ={
+    city : propTypes.array
+}
