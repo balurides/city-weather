@@ -43,6 +43,16 @@ export const updateUnit = unit => dispatch => {
         payload:unit
     })
 }
+
+export const fetchWeatherHistoryWithZip = zipcode => async dispatch => {
+    const zipapiUrl =`/forecast?zip=${zipcode}&appid=${API_KEY}`;
+    const zipSearchResponse = await fetchWeather.get(zipapiUrl);
+        console.log('response' + zipSearchResponse.data);
+    dispatch({
+        type:'ZIP_SEARCH_HISTORY',
+
+    })
+}
     
     
     
