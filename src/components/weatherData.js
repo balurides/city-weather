@@ -3,16 +3,18 @@ import { connect } from 'react-redux';
 
 import { fecthWeatherWithCity } from '../actions';
 import TempConversion from './tempConversion';
+import { updateUnit } from '../actions';
 
 class WeatherData extends React.Component{
     
     RenderWeather= ({weatherData}) => {
+        
         return(
             weatherData.map((weather) => {
                 return(
-                    <div key={weather.id}>
+                    <div key={indexedDB}>
                         <TempConversion 
-                        city = {this.props.city}
+                        unit = {this.props.unit}
                         weather={weather.main}/>
                     </div>
             )
@@ -34,7 +36,9 @@ class WeatherData extends React.Component{
 const mapStateToProps = state => {
     return{
         fetchWeather: state.fetchWeather,
+        unit:state.unit
         // city:state.city
+
     }
 }
-export default connect(mapStateToProps ,{fecthWeatherWithCity})(WeatherData);
+export default connect(mapStateToProps ,{fecthWeatherWithCity,updateUnit})(WeatherData);

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import propTypes from 'prop-types';
 
-import { updateCity,fecthWeatherWithCity,updateCountry } from '../actions';
+import { updateCity,fecthWeatherWithCity,updateCountry,updateUnit } from '../actions';
 import WeatherData from './weatherData';
 
  class WeatherSearch extends Component{
@@ -11,9 +11,10 @@ import WeatherData from './weatherData';
         this.state ={
             city:``,
             fetchWeather:[],
-            country:'USA',
-            unit:''
+            country:'',
+            unit:'none', 
         }
+        
     }
  /*    componentWillMount() {
             this.props.fecthWeatherWithCity("chicago");
@@ -23,29 +24,32 @@ import WeatherData from './weatherData';
         // }
         
     cityChange = city => {
+      
         if(city.length >0) {
-            this.setState({city})
+            this.setState({
+                city:city
+            })
         }
         this.props.updateCity(city); 
     }
     unitChange = event => {
         this.setState({unit:event.target.value});
+        this.props.updateUnit(event.target.value);
     }
 
     countryChange = country => {
         if(country.length>0) {
             this.setState({country});
         } 
-        this.props.updateCountry(this.state.country);
+        this.props.updateCountry(country);
     }
     weatherSubmit = event => {
         event.preventDefault();
-        console.log("city state is changed to " + this.state.city);     // this.props.fecthWeatherWithCity(this.state.city);
-        this.props.fecthWeatherWithCity(this.state.city);
+        this.props.fecthWeatherWithCity(this.state.city,this.state.country);
     }
 
+   
     render(){
-        // this.props.fecthWeatherWithCity(this.state.city);
         return(
                 <div>
                 <form onSubmit={this.weatherSubmit}>
@@ -57,6 +61,7 @@ import WeatherData from './weatherData';
                         onChange={event =>{
                             this.cityChange(event.target.value)}
                         }
+                        required
                     />
                     and
                     <label>
@@ -71,6 +76,7 @@ import WeatherData from './weatherData';
                     <label>
                         units
                         <select value={this.state.unit} onChange={this.unitChange}>
+                            <option value="none">Select units</option>
                             <option value="celisius">celisius</option>
                             <option value="Fahrenheit">Fahrenheit</option>
                         </select>
@@ -90,12 +96,13 @@ const mapStateToProps = state => {
     return{
         city:state.city,
         country:state.country,
-        fetchWeather: state.fetchWeather
+        fetchWeather: state.fetchWeather,
     };  
 }
 
-export default connect(mapStateToProps, {updateCity,fecthWeatherWithCity,updateCountry})(WeatherSearch);
+export default connect(mapStateToProps, {updateCity,fecthWeatherWithCity,
+    updateCountry,updateUnit})(WeatherSearch);
 
 WeatherSearch.propTypes ={
-    city : propTypes.array
+    city : propTypes.string
 }
