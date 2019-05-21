@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchWeatherHistoryWithZip  } from '../actions';
+import { fetchWeatherHistoryWithZip,zipcodeUpdate  } from '../actions';
 
 class ZipSearch extends Component{
     constructor(props){
@@ -14,10 +14,11 @@ class ZipSearch extends Component{
         this.setState({
             zipcode:zipcode
         })
-        this.props.fetchWeatherHistoryWithZip(zipcode);
+        this.props.zipcodeUpdate(this.state.zipcode);
     }
     zipSubmit = event => {
         event.preventDefault();
+        this.props.fetchWeatherHistoryWithZip(this.state.zipcode);
 
     }
    
@@ -47,8 +48,8 @@ class ZipSearch extends Component{
 
 const mapStateToProps = state => {
     return{
-        weatherHistory:state.weatherHistory
+        weatherHistory:state.weatherHistory,
     }
 }
-export default connect(mapStateToProps,{fetchWeatherHistoryWithZip})
+export default connect(mapStateToProps,{fetchWeatherHistoryWithZip,zipcodeUpdate})
 (ZipSearch);

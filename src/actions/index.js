@@ -50,7 +50,15 @@ export const fetchWeatherHistoryWithZip = zipcode => async dispatch => {
         console.log('response' + zipSearchResponse.data);
     dispatch({
         type:'ZIP_SEARCH_HISTORY',
+        payload:zipSearchResponse.data
 
+    })
+}
+
+export const zipcodeUpdate = zip => dispatch => {
+    dispatch({
+        type:'UPDATE_ZIPCODE',
+        payload:zip
     })
 }
     
