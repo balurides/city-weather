@@ -46,11 +46,19 @@ export const updateUnit = unit => dispatch => {
 
 export const fetchWeatherHistoryWithZip = zipcode => async dispatch => {
     const zipapiUrl =`/forecast?zip=${zipcode}&appid=${API_KEY}`;
-    const zipSearchResponse = await fetchWeather.get(zipapiUrl);
-        console.log('response' + zipSearchResponse.data);
+    var zipSearchResponse;
+    try {
+        zipSearchResponse = await fetchWeather.get(zipapiUrl);
+    
+    // const zipSearchResponse = await fetchWeather.get(zipapiUrl);
+        // console.log('response' + zipSearchResponse.data.city);
+    zipSearchResponse.data.cod === "200" ? console.log('pass'):console.log('fail');
+} catch (error) {
+    console.log("balaji" +error);
+}
     dispatch({
         type:'ZIP_SEARCH_HISTORY',
-        payload:zipSearchResponse.data
+       payload:zipSearchResponse.data
 
     })
 }

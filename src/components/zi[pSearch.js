@@ -19,7 +19,17 @@ class ZipSearch extends Component{
     zipSubmit = event => {
         event.preventDefault();
         this.props.fetchWeatherHistoryWithZip(this.state.zipcode);
+    }
+    weatherHistoryTable = historyData =>{
 
+        // inprogress hisory data
+        var history;
+        if (historyData === undefined || historyData.length === 0){
+            history = <div> true</div>
+        } else {
+            history= <div>false </div>
+        };
+        return (history);
     }
    
     render(){
@@ -40,6 +50,11 @@ class ZipSearch extends Component{
                     <button>
                         Find Weather History
                     </button>
+                </form>
+                <form>
+          
+                    <this.weatherHistoryTable historyData={this.props.weatherHistory}/> :
+                    <div>weather history </div>
                 </form>
             </div>
         )
