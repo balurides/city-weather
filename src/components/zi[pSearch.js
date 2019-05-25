@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchWeatherHistoryWithZip,zipcodeUpdate  } from '../actions';
+import WeatherHistoryChart from './weatherHistoryCharts';
 
 class ZipSearch extends Component{
     constructor(props){
@@ -11,26 +12,17 @@ class ZipSearch extends Component{
         }
     }
     zipChange = zipcode =>{
-        this.setState({
-            zipcode:zipcode
-        })
+        if(zipcode.length > 0){ 
+            this.setState({
+                zipcode:zipcode
+            })};
         this.props.zipcodeUpdate(this.state.zipcode);
     }
     zipSubmit = event => {
         event.preventDefault();
         this.props.fetchWeatherHistoryWithZip(this.state.zipcode);
     }
-    weatherHistoryTable = historyData =>{
-
-        // inprogress hisory data
-        var history;
-        if (historyData === undefined || historyData.length === 0){
-            history = <div> true</div>
-        } else {
-            history= <div>false </div>
-        };
-        return (history);
-    }
+    
    
     render(){
 
@@ -47,15 +39,14 @@ class ZipSearch extends Component{
                         </input>
                     </label>
                     
-                    <button>
+                    <button type="submit">
                         Find Weather History
                     </button>
-                </form>
-                <form>
-          
-                    <this.weatherHistoryTable historyData={this.props.weatherHistory}/> :
+                 </form>
+                {/* <form> */}
+                     <WeatherHistoryChart historyData={this.props.weatherHistory}/>
                     <div>weather history </div>
-                </form>
+                {/* </form> */}
             </div>
         )
     }
