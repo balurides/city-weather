@@ -57,5 +57,4 @@ const mapStateToProps = state => {
         weatherHistory:state.weatherHistory,
     }
 }
-export default connect(mapStateToProps,{fetchWeatherHistoryWithZip,zipcodeUpdate})
-(ZipSearch);
+export default connect(mapStateToProps,{fetchWeatherHistoryWithZip,zipcodeUpdate})(ZipSearch);
